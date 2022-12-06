@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The **native-wavefunction** project is a collection of functions that calculate and plot the hydrogen wave function using only native R. All functions were implemented by myself using the references below except for the associated Laguerre polynomials which use the [mpoly](https://github.com/dkahle/mpoly) implementation.
+The **native-wavefunction** project is a collection of functions that calculate and plot the hydrogen wave function using only native R. All functions were implemented by myself using the references below except for the associated Laguerre polynomials which use the [mpoly](https://github.com/dkahle/mpoly) implementation. A Monte Carlo simulation is then used to choose points in space where an electron would be likely to exist. These points can then plotted using [plotly](https://github.com/plotly/plotly.R) to create pointillist representations of the hydrogen orbitals.
 
 The functions in **native-wavefunction** are by no means fast. This project was a proof of concept and takes a significant amount of time to simulate more complex orbitals. An improved wave function implementation can be found in my [**wavefunction**](https://github.com/hmlea/wavefunction) package. The **wavefunction** package uses the [Boost implementation](https://www.boost.org/doc/libs/1_80_0/libs/math/doc/html/math_toolkit/sf_poly/sph_harm.html) of the spherical harmonics and is significantly faster.
 
@@ -120,4 +120,7 @@ In the future, I would like to:
 3.    DeBruyne 2003, [Bra, Ket, Dirac, and all that...](https://faculty.washington.edu/seattle/physics441/441xxxindex.html)
 4.    Lobo *et al.* 2019, [A smooth path to plot hydrogen atom via Monte Carlo method](https://doi.org/10.1590/1806-9126-RBEF-2019-0073)
 5.    Blanco *et al.* 1997, [Evaluation of the rotation matrices in the basis of real spherical harmonics](https://doi.org/10.1016/S0166-1280(97)00185-1)
+6.    Kahle 2013, [mpoly](https://journal.r-project.org/archive/2013-1/kahle.pdf) ([GitHub](https://github.com/dkahle/mpoly))
+7.    Sievert 2020, [Interactive Web-Based Data Visualization with R, plotly,
+  and shiny](https://plotly-r.com/) ([GitHub](https://github.com/plotly/plotly.R))
 

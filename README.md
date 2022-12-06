@@ -10,7 +10,11 @@ The **native-wavefunction** project is a collection of functions that
 calculate and plot the hydrogen wave function using only native R. All
 functions were implemented by myself using the references below except
 for the associated Laguerre polynomials which use the
-[mpoly](https://github.com/dkahle/mpoly) implementation.
+[mpoly](https://github.com/dkahle/mpoly) implementation. A Monte Carlo
+simulation is then used to choose points in space where an electron
+would be likely to exist. These points can then plotted using
+[plotly](https://github.com/plotly/plotly.R) to create pointillist
+representations of the hydrogen orbitals.
 
 The functions in **native-wavefunction** are by no means fast. This
 project was a proof of concept and takes a significant amount of time to
@@ -42,27 +46,27 @@ provide access to all the main functions below:
 -   `n`   The principle quantum number, n
 -   `l`   The azimuthal quantum number, l
 -   `m`   The magnetic quantum number, m
--   `max_psi`   The maximum value of *Ψ* for the orbital
+-   `max_psi`   The maximum value of $\Psi$ for the orbital
 -   `num_points`   The number of points to simulate for the orbital
--   `pos_col`   The color of points with a positive *Ψ* value
--   `neg_col`   The color of points with a negative *Ψ* value
+-   `pos_col`   The color of points with a positive $\Psi$ value
+-   `neg_col`   The color of points with a negative $\Psi$ value
 -   `bg_col`   The color of the background of the plot
 -   `benchmark`   Benchmark the simulation time and print it to the
     console
 -   `plot_orb`   Plot the orbital; if false, a data frame containing
-    coordinates and *Ψ* will be returned
+    coordinates and $\Psi$ will be returned
 
 ### Plotting Orbitals
 
     plot_data(coords, pos_col="#d13010", neg_col="#2d709f", bg_col="gray")
 
--   `coords`   A data frame containing coordinates and *Ψ* from the
+-   `coords`   A data frame containing coordinates and $\Psi$ from the
     `sim` function with `plot_orb = FALSE`
--   `pos_col`   The color of points with a positive *Ψ* value
--   `neg_col`   The color of points with a negative *Ψ* value
+-   `pos_col`   The color of points with a positive $\Psi$ value
+-   `neg_col`   The color of points with a negative $\Psi$ value
 -   `bg_col`   The color of the background of the plot
 
-### Calculating *Ψ*
+### Calculating $\Psi$
 
     psi(n, l, m, r, theta, phi)
 
@@ -70,8 +74,8 @@ provide access to all the main functions below:
 -   `l`   The azimuthal quantum number, l
 -   `m`   The magnetic quantum number, m
 -   `r`   The radius in spherical coordinates
--   `theta`   The angle *Θ* in spherical coordinates
--   `phi`   The angle *Φ* in spherical coordinates
+-   `theta`   The angle $\Theta$ in spherical coordinates
+-   `phi`   The angle $\Phi$ in spherical coordinates
 
 ### Calculating the Radial Component
 
@@ -88,7 +92,7 @@ provide access to all the main functions below:
 -   `l`   The azimuthal quantum number, l
 -   `m`   The magnetic quantum number, m
 -   `r`   The radius in spherical coordinates
--   `phi`   The angle *Φ* in spherical coordinates
+-   `phi`   The angle $\Phi$ in spherical coordinates
 
 ## Examples
 
@@ -97,8 +101,8 @@ Simulate and plot the the 2p<sub>x</sub> orbital using electron density:
     sim(2, 1, -1)
 
 Simulate the electron density of the 2s orbital; then plot the orbital
-on a white background and color positive values of *Ψ* green and
-negative values of *Ψ* orange:
+on a white background and color positive values of $\Psi$ green and
+negative values of $\Psi$ orange:
 
     coordinates = sim(2, 0, 0, plot_orb=FALSE)
     plot_data(coordinates, pos_col="green", neg_col="orange", bg_col="white")
@@ -109,9 +113,9 @@ colored background without benchmarking; then display the plot:
     fig = sim(1, 0, 0, num_points=4000, bg_col="#fffdd0", benchmark=FALSE)
     fig
 
-Calculate and store *Ψ* for an orbital with quantum numbers *n* = 6,
-*l* = 4, and *m* =  − 3 at the spherical coordinates *r* = 0.9823,
-*Θ* = 1.65, and *Φ* = 5.392; then print the *Ψ* and \|*Ψ*\|<sup>2</sup>
+Calculate and store $\Psi$ for an orbital with quantum numbers $n=6$,
+$l=4$, and $m=-3$ at the spherical coordinates $r=0.9823$,
+$\Theta=1.65$, and $\Phi=5.392$; then print the $\Psi$ and $|\Psi|^2$
 values with labels:
 
     psi_val = psi(6, 4, -3, 0.9823, 1.65, 5.392)
@@ -140,3 +144,9 @@ In the future, I would like to:
 5.  Blanco *et al.* 1997, [Evaluation of the rotation matrices in the
     basis of real spherical
     harmonics](https://doi.org/10.1016/S0166-1280(97)00185-1)
+6.  Kahle 2013,
+    [mpoly](https://journal.r-project.org/archive/2013-1/kahle.pdf)
+    ([GitHub](https://github.com/dkahle/mpoly))
+7.  Sievert 2020, [Interactive Web-Based Data Visualization with R,
+    plotly, and shiny](https://plotly-r.com/)
+    ([GitHub](https://github.com/plotly/plotly.R))
