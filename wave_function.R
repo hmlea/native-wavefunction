@@ -13,11 +13,7 @@ source("spherical_harmonics.R")
   # theta [0, pi] radians OR [0, 180] degrees
   # phi [0, 2pi) radians OR [0, 360) degrees
 psi = function(n, l, m, r, theta, phi) {
-  # suppress messages is called to suppress messages shown by the mpoly func
-    # taking this out does not prevent the program from working - it just runs
-    # slower b/c at some qunatum numbers, there is lots of console output giving
-    # information on the functions calculations
-  radial = suppressMessages(radial_comp(n, l, r))
+  radial = radial_comp(n, l, r)
   spherical = real_sph_harm(l, m, theta, phi)
   wave_func = radial * spherical
 }

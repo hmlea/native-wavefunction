@@ -14,7 +14,11 @@ radial_comp = function(n, l, r) {
   
   # associated laguerre function from mpoly
   # EVENTUALLY i would like to do these calculations in house
-  assoc_lag = as.function(laguerre((n-l-1), alpha=(2*l+1)))
+  # suppress messages is called to suppress messages shown by the mpoly func
+    # taking this out does not prevent the program from working - it just runs
+    # slower b/c at some qunatum numbers, there is lots of console output giving
+    # information on the functions calculations
+  assoc_lag = suppressMessages(as.function(laguerre((n-l-1), alpha=(2*l+1))))
   
   Rr = sqrt(radical) * exp(-(pr/2)) * pr**l * assoc_lag(pr)
 }
@@ -34,7 +38,7 @@ bohr_radial_comp = function(n, l, r) {
   radical = (p**3) * (factorial(n-l-1))/(2*n*factorial(n+l))
   
   # associated laguerre function from mpoly
-  assoc_lag = as.function(laguerre((n-l-1), alpha=(2*l+1)))
+  assoc_lag = suppressMessages(as.function(laguerre((n-l-1), alpha=(2*l+1))))
   
   Rr = sqrt(radical) * exp(-(pr/2)) * pr**l * assoc_lag(pr)
 }
