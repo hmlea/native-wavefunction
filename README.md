@@ -94,6 +94,37 @@ provide access to all the main functions below:
 -   `r`   The radius in spherical coordinates
 -   `phi`   The angle $\Phi$ in spherical coordinates
 
+### Testing
+
+    source("tests/tests.R")
+
+-   Runs a test file that compares the values of the
+    **native-wavefunction** project to the **wavefunction** package
+
+Tests can also be manually created using:
+
+    source("tests/core.R")
+    t = gen_tests(num_tests, seed, max_n, max_r)
+
+-   `num_tests`   The number of tests to create; the default is 1000
+-   `seed`   The seed; the default is the current UNIX timestamp
+-   `max_n`   The maximum principle quantum number, n, for the tests
+-   `max_r`   The maximum radius, r, of the spherical coordinates for
+    the tests
+
+Tests can be summarized using:
+
+    tol = summarize_tests(tests, tolerance, omit_index)
+
+-   `tests`   A test to summarize
+-   `tolerance`   The maximum relative error for values to be considered
+    equal; the default is 10<sup>-7</sup>
+-   `omit_index`   Omit the index of values that aren’t equal; the
+    default is `TRUE`
+
+`tol` then stores the minimum tolerance for all values to be considered
+equal. This can be confirmed by using `tol` with `summarize_tests()`.
+
 ## Examples
 
 Simulate and plot the the 2p<sub>x</sub> orbital using electron density:
@@ -121,6 +152,14 @@ values with labels:
     psi_val = psi(6, 4, -3, 0.9823, 1.65, 5.392)
     print(paste("Psi:", psi_val))
     print(paste("|Psi|^2:", abs(psi_val)**2))
+
+Test to see how equal the **native-wavefunction** project is compared to
+the **wavefunction** package using 2000 different $\Psi$ values:
+
+    source("tests/core.R")
+    test = gen_tests(2000)
+    tol = summarize_tests(test)
+    summarize_tests(test, tolerance=tol)
 
 ## To Do
 
